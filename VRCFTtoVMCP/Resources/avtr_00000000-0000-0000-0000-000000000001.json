@@ -309,6 +309,111 @@
         "address": "/avatar/parameters/v2/TongueOut",
         "type": "Float"
       }
+    },
+    {
+      "name": "v2/TongueUp",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueUp",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueDown",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueDown",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueLeft",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueLeft",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueRight",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueRight",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueRoll",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueRoll",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueBendDown",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueBendDown",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueCurlUp",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueCurlUp",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueSquish",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueSquish",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueFlat",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueFlat",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueTwistLeft",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueTwistLeft",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/TongueTwistRight",
+      "input": {
+        "address": "/avatar/parameters/v2/TongueTwistRight",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/CheekPuffLeft",
+      "input": {
+        "address": "/avatar/parameters/v2/CheekPuffLeft",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/CheekPuffRight",
+      "input": {
+        "address": "/avatar/parameters/v2/CheekPuffRight",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/CheekSuckLeft",
+      "input": {
+        "address": "/avatar/parameters/v2/CheekSuckLeft",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "v2/CheekSuckRight",
+      "input": {
+        "address": "/avatar/parameters/v2/CheekSuckRight",
+        "type": "Float"
+      }
     }
   ]
 }

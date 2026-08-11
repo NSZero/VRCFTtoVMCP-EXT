@@ -16,6 +16,7 @@ namespace VRCFTtoVMCP
 
         public void Start(int port)
         {
+            bool testOk = VRCFTParametersV2Parser.TryParse("/avatar/parameters/v2/CheekPuffSuck", out var testParam);
             Stop();
             _endPoint = new IPEndPoint(IPAddress.Any, port);
             _udpClient = new UdpClient(AddressFamily.InterNetwork);

@@ -59,7 +59,6 @@ namespace VRCFTtoVMCP
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "BrowInnerUp", _weights[VRCFTParametersV2.BrowInnerUp]));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "BrowOuterUpLeft", _weights[VRCFTParametersV2.BrowOuterUpLeft]));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "BrowOuterUpRight", _weights[VRCFTParametersV2.BrowOuterUpRight]));
-            bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekPuff", _weights[VRCFTParametersV2.CheekPuffSuck] > 0 ? _weights[VRCFTParametersV2.CheekPuffSuck] : 0f));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekSquintLeft", _weights[VRCFTParametersV2.CheekSquintLeft]));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekSquintRight", _weights[VRCFTParametersV2.CheekSquintRight]));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "EyeBlinkLeft", EyeBlink(_weights[VRCFTParametersV2.EyeLidLeft])));
@@ -106,6 +105,17 @@ namespace VRCFTtoVMCP
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "NoseSneerLeft", _weights[VRCFTParametersV2.NoseSneerLeft]));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "NoseSneerRight", _weights[VRCFTParametersV2.NoseSneerRight]));
             bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueOut", _weights[VRCFTParametersV2.TongueOut]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueUp", _weights[VRCFTParametersV2.TongueUp]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueDown", _weights[VRCFTParametersV2.TongueDown]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueLeft", _weights[VRCFTParametersV2.TongueLeft]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueRight", _weights[VRCFTParametersV2.TongueRight]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueRollLeft", MoveLeft(_weights[VRCFTParametersV2.TongueRoll])));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "TongueRollRight", MoveRight(_weights[VRCFTParametersV2.TongueRoll])));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekPuff", MoveRight(_weights[VRCFTParametersV2.CheekPuffSuck])));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekSuck", MoveLeft(_weights[VRCFTParametersV2.CheekPuffSuck]))); bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekPuffLeft", _weights[VRCFTParametersV2.CheekPuffLeft]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekPuffRight", _weights[VRCFTParametersV2.CheekPuffRight]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekSuckLeft", _weights[VRCFTParametersV2.CheekSuckLeft]));
+            bundle.Add(new Message("/VMC/Ext/Blend/Val", "CheekSuckRight", _weights[VRCFTParametersV2.CheekSuckRight]));
             bundle.Add(new Message("/VMC/Ext/Blend/Apply"));
             oscClient.Send(bundle);
         }

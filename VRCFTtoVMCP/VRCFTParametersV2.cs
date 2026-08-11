@@ -133,6 +133,14 @@ namespace VRCFTtoVMCP
         SmileSadRight,
         SmileSadLeft,
         SmileSad,
+        TongueUp,
+        TongueDown,
+        TongueLeft,
+        TongueRight,
+        CheekPuffLeft,
+        CheekPuffRight,
+        CheekSuckLeft,
+        CheekSuckRight,
 
         Max
     }

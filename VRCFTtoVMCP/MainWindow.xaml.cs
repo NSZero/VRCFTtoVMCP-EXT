@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Threading;
 using VRCFTtoVMCP.Osc;
 
@@ -23,6 +24,7 @@ namespace VRCFTtoVMCP
         readonly VrcOscReceiver _receiver = new();
         readonly VMCPSender _sender = new();
         readonly System.Timers.Timer _timer = new(1000);
+        readonly System.Timers.Timer _weightMonitorTimer = new(100);
         readonly Makaretu.Dns.ServiceProfile service;
         readonly Makaretu.Dns.ServiceDiscovery serviceDiscovery;
 
@@ -32,6 +34,13 @@ namespace VRCFTtoVMCP
             Title = $"VRCFTtoVMCP v{Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion}";
             _model = (MainWindowViewModel)DataContext;
             _timer.Elapsed += Timer_Elapsed;
+            for (int i = 0; i < (int)VRCFTParametersV2.Max; i++)
+            {
+                _model.WeightRows.Add(new WeightRow(((VRCFTParametersV2)i).ToString()));
+            }
+            _weightMonitorTimer.Elapsed += WeightMonitorTimer_Elapsed;
+            _weightMonitorTimer.AutoReset = true;
+            _weightMonitorTimer.Start();
 
             AppConfig? appConfig = ReadConfig();
             _model.AutoStart = appConfig?.autoStart ?? _model.AutoStart;
@@ -60,6 +69,24 @@ namespace VRCFTtoVMCP
             if (_model.AutoStart)
             {
                 Start();
+            }
+        }
+
+        void WeightMonitorTimer_Elapsed(object? sender, ElapsedEventArgs e)
+        {
+            var snapshot = new float[(int)VRCFTParametersV2.Max];
+            for (int i = 0; i < snapshot.Length; i++)
+            {
+                snapshot[i] = VRCFTParametersStore.GetWeight((VRCFTParametersV2)i);
+            }
+            Dispatcher.Invoke(() => UpdateWeightMonitor(snapshot));
+        }
+
+        void UpdateWeightMonitor(float[] snapshot)
+        {
+            for (int i = 0; i < snapshot.Length; i++)
+            {
+                _model.WeightRows[i].Value = snapshot[i];
             }
         }
 
@@ -235,12 +262,24 @@ namespace VRCFTtoVMCP
             }
         }
 
+        private void WeightFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string filterText = ((System.Windows.Controls.TextBox)sender).Text;
+            var view = (CollectionViewSource)Resources["WeightRowsView"];
+            view.View.Filter = filterText.Length == 0
+                ? null
+                : (obj => ((WeightRow)obj).Name.Contains(filterText, StringComparison.OrdinalIgnoreCase));
+        }
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (!_model.IsStop)
             {
                 Stop();
             }
+
+            _weightMonitorTimer.Stop();
+            _weightMonitorTimer.Dispose();
 
             serviceDiscovery.Unadvertise(service);
             serviceDiscovery.Dispose();
@@ -294,6 +333,19 @@ namespace VRCFTtoVMCP
         }
     }
 
+    internal class WeightRow : ObservableBase
+    {
+        public string Name { get; }
+        private float _Value;
+        public float Value { get => _Value; set => SetProperty(ref _Value, value); }
+
+        public WeightRow(string name)
+        {
+            Name = name;
+        }
+    }
+
+
     internal class MainWindowViewModel : ObservableBase
     {
         private bool _IsStop = true;
@@ -314,6 +366,7 @@ namespace VRCFTtoVMCP
         private string _ButtonText = "START";
         private string _StatusText = "Status: Stopped.";
 
+        public System.Collections.ObjectModel.ObservableCollection<WeightRow> WeightRows { get; } = new();
         public bool IsStop { get => _IsStop; set => SetProperty(ref _IsStop, value); }
         public bool AutoStart { get => _AutoStart; set => SetProperty(ref _AutoStart, value); }
         public string VmcpSendRatePerSec { get => _VmcpSendRatePerSec; set => SetProperty(ref _VmcpSendRatePerSec, value); }
