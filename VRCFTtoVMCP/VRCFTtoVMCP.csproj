@@ -8,7 +8,7 @@
     <AssemblyName>VRCFTtoVMC-EX</AssemblyName>
     <Product>VRCFTtoVMC-EX</Product>
     <ApplicationIcon>logo_VRCFTtoVMCP.ico</ApplicationIcon>
-    <Version>0.3.0</Version>
+    <Version>1.0.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
